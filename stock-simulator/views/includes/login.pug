@@ -1,0 +1,40 @@
+doctype html(style="height: 100%")
+#loginModal.modal.fade.modal-lg(tabindex='-1' aria-labelledby='loginModalLabel' aria-hidden='true' data-display=!(userExists&&passwordValid))
+    .modal-dialog.modal-dialog-centered
+        .modal-content.text-end(style="border-radius:25px;")
+            .modal-body.text-start(style="padding: 0px;")
+                .container.text-center
+                    .row 
+                        .col.bg-image(style="background-image: url('https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/MPaEbz-/videoblocks-3d-motion-graphics-background-with-digitally-animated-financial-line-graphs-running-through-virtual-space-with-holographic-rates-and-stock-market-board_rrmqee0uen_thumbnail-1080_01.png'); height: 50vh; width:50vh; background-repeat: no-repeat; overflow: hidden; position:relative; border-bottom-left-radius: 25px; border-top-left-radius: 25px;")
+                            .text-end(style="position:absolute; bottom:0; right:0; padding:50px;")
+                                p(class='fs-2 fw-light text-white') Start
+                                p(class='fs-2 fw-light text-white') Simulation Trading
+                                p(class='fs-2 fw-light text-white') Now.
+                        .col.text-end(style="padding: 25px;")
+                            button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                            .text-start
+                                h1 Sign in
+                                form.needs-validation(action="/" method="post" class=!(userExists&&passwordValid)?'was-validated': '') 
+                                    .text-start
+                                        .mb-3
+                                            label.mr-3(for="username") Username:
+                                            .input-group.has-validation
+                                                input.form-control(type="text" id="username" name="username" value=username required pattern=!(userExists)?'^(?!'+username+'$).*':'^[a-z\\d]+$')
+                                                if !(userExists&&passwordValid) && !userExists
+                                                    .invalid-feedback Username does not exist.
+                                                else
+                                                    .invalid-feedback Username cannot be empty.
+                                        .mb-3
+                                            label.mr-3(for="password") Password:
+                                            .input-group.has-validation
+                                                
+                                                input.form-control(type="password" id="password" name="password" required)
+                                                if !(userExists&&passwordValid) && userExists
+                                                    .invalid-feedback Incorrect password.
+                                                else
+                                                    .invalid-feedback Password cannot be empty.
+                                        .text-center
+                                            p 
+                                                |Don't have an account?&nbsp;
+                                                a(href="/register" class="link-primary") Register here
+                                            button.btn.btn-dark(type="submit") Login

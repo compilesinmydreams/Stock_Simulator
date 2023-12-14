@@ -1,0 +1,30 @@
+doctype html
+head
+    link(rel='stylesheet', href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous")
+    title Stock Simulator
+
+body 
+    div(class='container-fluid bg-image' style="background-image: url('https://cdn.discordapp.com/attachments/1159815222299725844/1166766242443579463/backy.png?ex=654baebd&is=653939bd&hm=0d2b9a6b4460f2b4573d316111498c25e8b6251aa0cc02449adc5b678fba03ac&'); height: 100vh; background-size: cover; background-repeat: no-repeat; overflow: hidden;")
+        div(class="container text-center")
+            div(class="row")
+                div(class="col text-start")
+                    div(style="margin: 150px 10px;")
+                        h1(class='display-5 text-white') Welcome to 
+                        h1(class='display-1 text-white') Trade Trainer
+                        p(class='fs-4 fw-lighter text-white') At Trade Trainer, we have designed a seamless practice experience for aspiring investors. Trade Trainer is a user-friendly stock market simulation platform. Practice trading with virtual currency for virtual fictitious stocks, connect with peers and sharpen your skills in a risk-free, collaborative learning environment so you feel more confident about diving into the stock market and trading in the real world.   
+                        a(href="/register")
+                            button(type="button" class="btn btn-dark btn-lg") Register Now
+                div(class="col text-end")
+                    div(style="margin: 10px;")
+                        button.btn.btn-dark.btn-lg(type='button' data-bs-toggle='modal' data-bs-target='#loginModal')
+                            | Log in
+                        include includes/login.pug           
+                        div
+                            div(style="background-image: url('https://cdn.discordapp.com/attachments/1159815222299725844/1166766241629864028/logus.png?ex=654baebd&is=653939bd&hm=664450514867e1afef13f2d22c21f03ce9eea31f38aae5c06a0f2558ac85e579&'); height: 100vh; background-repeat: no-repeat;")
+    
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous")
+    script(src="login.js")
+
+
+

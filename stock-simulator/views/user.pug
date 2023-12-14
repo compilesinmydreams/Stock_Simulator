@@ -1,0 +1,104 @@
+doctype html(style="height: 100%")
+head
+    link(rel='stylesheet', href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous")
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css")
+    title Stock Simulator
+
+body(style="height:100%; overflow-y: hidden;")
+    //nav.nav.justify-content-center.bg-dark.bg-opacity-75
+        a.nav-link.active(aria-current="page" href="#") Home 
+        a.nav-link.link-light(href="#") Activity 
+        a.nav-link.link-light(href="#") Market 
+    .container-fluid.h-100.w-100.m-0.p-0.bg-image(style="background-image: url('https://cdn.discordapp.com/attachments/1159815222299725844/1166766241965416448/stockmarket.webp?ex=654baebd&is=653939bd&hm=9359dab710c0dc28a7c867e2f74ec62844bc535d6413bba208a27d6510024870&');  height: 100vh; background-size: cover; background-repeat: no-repeat; overflow: hidden; backdrop-filter: brightness(25%);")
+        nav.nav.justify-content-center.bg-dark.bg-opacity-25
+            a.nav-link.link-light(href="/") Home 
+            a.nav-link.active(aria-current="page" href="/user") My Activity 
+            a.nav-link.link-light(href="/market") Market  
+        .container.text-center(style="height:100%")
+            .row.text-center(style="height:100%")
+                .col
+                    .row(style="margin: 25px;")
+                        .col.bg-dark.bg-opacity-75.p-3.text-start(style="border-radius: 25px; width: 90%;")
+                            p.fs-3.fw-bold.text-success $42,069.69 CAD
+                            p.fs-5.text-light.fw-light
+                                |Today:&nbsp;
+                                span.text-danger -$123.45 CAD
+                            p.fs-5.text-light.fw-light
+                                |Total Gain:&nbsp;
+                                span.text-success +20.5%
+                    .row.h-75
+                        .col
+                            .bg-dark.bg-opacity-75(style="border-radius: 25px; height: 50%; hidden: auto; display: inline-block; margin: 25px; width: 90%;")
+                                .input-group.m-3
+                                    h1.display-5.text-light.fw-lighter Portfolio 
+                                    //.input-group.w-75
+                                        input.form-control(type="search" name="stock" id="stock" placeholder="Search portfolio" aria-label="Search portfolio" data-bs-theme="dark")
+                                        button.btn.btn-primary(type="button")
+                                            i.bi.bi-search.icon-white
+                                
+                                div(style=" height: 50%; overflow: auto; display: inline-block;")
+                                    table.table(data-bs-theme="dark" style="background-color: transparent;")
+                                        thead
+                                            tr 
+                                                th(scope="col") Symbol 
+                                                th(scope="col") Price
+                                        tbody
+                                            if(stocks && stocks.length > 0)
+                                                for stock in stocks 
+                                                    tr 
+                                                        td 
+                                                            p.fs-2.text-light.fw-light #{stock.symbol}
+                                                            p.fs-5.text-light.fw-lighter #{stock.company}
+                                                        td
+                                                            p.fs-2.text-light.fw-light #{stock.price}
+                                                            if(stock.price > 0)
+                                                                p.fs-5.text-light.fw-lighter.text-success #{stock.day}
+                                                            else 
+                                                                p.fs-5.text-light.fw-lighter.text-danger #{stock.day}
+                                                        
+                .col
+                    h1.display-1.text-light.fw-lighter #{name}
+                    .bg-dark.bg-opacity-75.bg-opacity-75(style="border-radius: 25px; height: 35%; display: inline-block; margin: 25px; width: 90%;")
+                        p.fs-2.text-light.fw-light Select stock from portfolio to view performance chart 
+                    button.btn.btn-outline-light.btn-lg(id="market") Go to Market
+
+
+                .col
+                    if otherProfile == true
+                        .w-100.text-end(style="margin: 25px;")
+                            form(action='' method='post' style="display:none;" id="following")
+                                input(type="radio" name="isFollowing" id="addFollow" value=0 checked=!following)
+                                input(type="radio" name="isFollowing" id="rmvFollow" value=1 checked=following)
+                                input(type="hidden" name="name" id="name" value=name)
+
+                            button.following.btn.btn-outline-success.btn-lg(style=following ? 'display:none' : '' id="add_Follow") Follow
+                            button.following.btn.btn-outline-danger.btn-lg(style=!following ? 'display:none' : '' id="remove_Follow") Unfollow
+                    .bg-dark.bg-opacity-75.p-3.text-start(style="border-radius: 25px; overflow-y: auto; display: inline-block; margin: 25px; width: 90%; max-height: 35%;")
+                        p.fs-2.text-light.fw-lighter #{name} says:
+                        input.text-light(type="text" readonly class="form-control-plaintext" id="note" value=note)
+                    
+                    .bg-dark.bg-opacity-75.p-3.text-start(style="border-radius: 25px; overflow-y: auto; display: inline-block; margin: 25px; width: 90%; max-height: 35%;")
+                        h1.display-5.text-light.fw-lighter Friends: 
+                        .input-group.mb-2
+                            form(action="/search" method="get")
+                                .input-group
+                                    input.form-control(type="search" name="search" id="search" placeholder="Add friend" aria-label="Find friend" data-bs-theme="dark")
+                                    button.btn.btn-primary(type="submit")
+                                        i.bi.bi-search.icon-white
+                        .list-group(data-bs-theme="dark")
+                            if(friends && friends.length > 0)
+                                for friend in friends 
+                                    a(class="list-group-item list-group-item-action " href='?id=' + friend.id) 
+                                        .d-flex.w-100.justify-content-between 
+                                            h5.mb-1.fw-lighter #{friend.fName} #{friend.lName}
+                                            small #{'>'}
+                                            
+                                            
+                    
+    script(src="https://code.jquery.com/jquery-3.5.1.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous")
+    script(src="user.js")
+
+
+
+

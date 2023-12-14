@@ -1,0 +1,67 @@
+doctype html
+head
+    link(rel='stylesheet', href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous")
+    title Stock Simulator
+
+body 
+    .container-fluid.bg-image(style="background-image: url('https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/MPaEbz-/videoblocks-3d-motion-graphics-background-with-digitally-animated-financial-line-graphs-running-through-virtual-space-with-holographic-rates-and-stock-market-board_rrmqee0uen_thumbnail-1080_01.png');  height: 100vh; background-size: cover; background-repeat: no-repeat; overflow: hidden;")
+        .container.text-center(style="height:100%")
+        
+            .row(style="height:100%")
+                .col(style="position:relative;")
+                    .text-end(style="position:absolute; bottom:0; right:0; padding:50px 150px 300px 50px;")
+                        p(class='fs-1 fw-bold text-white') Register Now.
+                        p(class='fs-1 fw-bold text-white') Start Exploring.
+                .col.text-end
+                    .text-start(style="background-color: white; padding: 25px; margin: 85px; border-radius: 25px; height: 75%")
+                        h1.display-5 Register:
+                        form#register.needs-validation(action="/user/register" method='POST' novalidate class=submitted?'was-validated': '') 
+                            .text-start
+                                .mb-3 
+                                    label.form-label(for="new_username") Username:
+                                    .input-group.has-validation
+                                        input#new_username.form-control(type="text" required name="new_username" value=new_username pattern=new_username?'^(?!'+new_username+'$).*':'^[a-z\\d]+$')
+                                        if new_username.length 
+                                            .invalid-feedback Username is taken.
+                                        else
+                                            .invalid-feedback Please choose a username.
+                                .mb-3 
+                                    label.form-label(for="fName") First Name:
+                                    .input-group.has-validation
+                                        input#fName.form-control(type="text" required name="fName" minlength=2 value=fName)
+                                        .invalid-feedback Please enter your first name.
+                                .mb-3 
+                                    label.form-label(for="lName") Last Name:
+                                    .input-group.has-validation
+                                        input#lName.form-control(type="text" required name="lName" minlength=2 value=lName)
+                                        .invalid-feedback Please enter your last name.
+                                .mb-3 
+                                    label.form-label(for="newPassword") Password:
+                                    .input-group.has-validation
+                                        input#newPassword.form-control(type="password" required name="password" minlength=6 value=password)
+                                        .invalid-feedback Please enter a valid password
+                                .mb-3 
+                                    label.form-label(for="confirm") Confirm Password:
+                                    .input-group.has-validation
+                                        input#confirm.form-control(type="password" required name="confirm" minlength=6)
+                                        .invalid-feedback Comfirmation password must match password.
+                                .mb-3 
+                                    label.form-label(for="amount") Starting amount:
+                                    .input-group.has-validation
+                                        input#amount.form-control(type="number" required min=0 name="amount" value=amount) 
+                                        .invalid-feedback Please enter a starting amount
+                                .text-center
+                                    p.fs-6
+                                        |Already have an account?&nbsp;
+                                        a(href="#" class="link-primary" data-bs-toggle='modal' data-bs-target='#loginModal') Login here
+                                    button#complete.btn.btn-dark(type="submit") Register
+
+                        include includes/login.pug
+    
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous")
+    script(src="register.js")
+
+
+
+
